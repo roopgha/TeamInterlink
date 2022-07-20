@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ArkShaOffline : FighterOffline, IAction
+public class SpeeroOffline : FighterOffline, IAction
 {
 	[SerializeField] private Image HPBar, FPBar;
 
@@ -28,8 +28,8 @@ public class ArkShaOffline : FighterOffline, IAction
 
 	protected override void Update()
 	{
-		HPBar.fillAmount = HP/100f;
-		FPBar.fillAmount = FP/100f;
+		HPBar.fillAmount = HP / 100f;
+		FPBar.fillAmount = FP / 100f;
 
 		base.Update();
 
@@ -140,7 +140,7 @@ public class ArkShaOffline : FighterOffline, IAction
 				break;
 		}
 	}
-	
+
 	IEnumerator Death()
 	{
 		m_animator.SetBool("Death", true);
@@ -168,7 +168,7 @@ public class ArkShaOffline : FighterOffline, IAction
 		if (attacking3) return;
 		if (attacking2) return;
 		if (attacking1) return;
-		if (transform.position.y > 0) return;
+		if (transform.position.y > 1f) return;
 		coroutines[0] = StartCoroutine(CAttack());
 	}
 	IEnumerator CAttack()
@@ -199,7 +199,7 @@ public class ArkShaOffline : FighterOffline, IAction
 		if (attacking2) return;
 		if (attacking1) return;
 		if (chargedAttack < 0) return;
-		if (transform.position.y > 0) return;
+		if (transform.position.y > 1f) return;
 
 		chargedAttack = -1f;
 		coroutines[1] = StartCoroutine(CChargedAttack());
@@ -220,7 +220,7 @@ public class ArkShaOffline : FighterOffline, IAction
 		m_animator.SetBool("Attack", false);
 		attacking2 = false;
 	}
-	
+
 	public void JumpAttack()
 	{
 		if (attacking4) return;
@@ -267,7 +267,7 @@ public class ArkShaOffline : FighterOffline, IAction
 		if (jumpAttack < 0) return;
 		if (m_animator.GetFloat("AirSpeedY") <= 0 && !m_grounded) return;
 		if (FP < 100) return;
-		coroutines[3] = StartCoroutine(CLethalMove());	
+		coroutines[3] = StartCoroutine(CLethalMove());
 	}
 	IEnumerator CLethalMove()
 	{
@@ -367,22 +367,22 @@ public class ArkShaOffline : FighterOffline, IAction
 			{
 				if (attacking1)
 				{
-					collision.GetComponent<SpeeroOffline>().hit = 0;
+					collision.GetComponent<ArkShaOffline>().hit = 0;
 					FP += 3;
 				}
 				else if (attacking2)
 				{
-					collision.GetComponent<SpeeroOffline>().hit = 1;
+					collision.GetComponent<ArkShaOffline>().hit = 1;
 					FP += 4;
 				}
 				else if (attacking3)
 				{
-					collision.GetComponent<SpeeroOffline>().hit = 2;
+					collision.GetComponent<ArkShaOffline>().hit = 2;
 					FP += 6;
 				}
 				else if (attacking4)
 				{
-					collision.GetComponent<SpeeroOffline>().hit = 3;
+					collision.GetComponent<ArkShaOffline>().hit = 3;
 					if (!lhit)
 					{
 						lhit = true;
@@ -396,23 +396,23 @@ public class ArkShaOffline : FighterOffline, IAction
 			{
 				if (attacking1)
 				{
-					collision.GetComponent<SpeeroOffline>().hit = 0;
+					collision.GetComponent<ArkShaOffline>().hit = 0;
 					FP += 3;
 				}
 				else if (attacking2)
 				{
-					collision.GetComponent<SpeeroOffline>().hit = 1;
+					collision.GetComponent<ArkShaOffline>().hit = 1;
 					FP += 4;
 				}
 				else if (attacking3)
 				{
-					collision.GetComponent<SpeeroOffline>().hit = 2;
+					collision.GetComponent<ArkShaOffline>().hit = 2;
 					FP += 6;
 				}
 				else if (attacking4)
 				{
-					collision.GetComponent<SpeeroOffline>().hit = 3;
-					if (!collision.GetComponent<SpeeroOffline>().guard)
+					collision.GetComponent<ArkShaOffline>().hit = 3;
+					if (!collision.GetComponent<ArkShaOffline>().guard)
 					{
 						if (!lhit)
 						{

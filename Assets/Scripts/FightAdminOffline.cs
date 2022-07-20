@@ -25,8 +25,8 @@ public class FightAdminOffline : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		player1 = GameObject.Find("ArkShaOffline");
-		player2 = GameObject.Find("ArkShaOffline (1)");
+		player1 = GameObject.Find("SpeeroOffline");
+		player2 = GameObject.Find("ArkShaOffline");
 		//CallC();
 		StartCoroutine(ReBuild());
 	}
@@ -53,6 +53,10 @@ public class FightAdminOffline : MonoBehaviour
 		player2.SetActive(true);
 		timesUp.SetActive(false);
 
+		player1.GetComponent<SpeeroOffline>().HP = 100;
+		player1.GetComponent<SpeeroOffline>().FP = 0;
+		player2.GetComponent<ArkShaOffline>().HP = 100;
+		player2.GetComponent<ArkShaOffline>().FP = 0;
 		GameObject.Find("1").transform.Find("HPBar").GetComponent<Image>().fillAmount = 1;
 		GameObject.Find("1").transform.Find("STBar").GetComponent<Image>().fillAmount = 1;
 		GameObject.Find("2").transform.Find("HPBar").GetComponent<Image>().fillAmount = 1;
@@ -74,7 +78,7 @@ public class FightAdminOffline : MonoBehaviour
 				}
 				temp++;
 			}
-			player1.transform.position = new Vector2(-6, 0);
+			player1.transform.position = new Vector2(-6, 1.44f);
 			player2.transform.position = new Vector2(6, 0);
 			yield return null;
 		}
