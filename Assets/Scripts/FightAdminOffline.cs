@@ -115,7 +115,7 @@ public class FightAdminOffline : MonoBehaviour
 				wincount2++;
 				break;
 			}
-			if(int.Parse(text.text) <= 0)
+			if(int.Parse(text.text) > 60)
 			{
 				timesUp.SetActive(false);
 				break;
